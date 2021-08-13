@@ -33,8 +33,14 @@ If your target is a go-grpc server, use the `go-xhttp2-verbose.sh` script instea
 (as the underlying h2 implementation of go-grpc is coming from golang.org/x/net/http2
 and does not use the language built-in.)
 
+If you are targeting a Google binary, you may need to override the package like this:
+
+```
+PACKAGE=google3/third_party/golang/go_net/http2/http2 ./go-xhttp2-verbose.sh $(pidof worker_main)
+```
+
 The other script, `remote-setenv.sh` can be used to set an environment variable in a remote process
 on the fly. Calling it with `GODEBUG http2debug=2` would not work, as this envvar is processed early
-in a package initializer of `net/http`.
+in a package initializer of `net/http`. 
 
 (Remark, runtime changes of environment variables don't reflect in `/proc/<pid>/environ˙.)

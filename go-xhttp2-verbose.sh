@@ -11,14 +11,16 @@ if [ -z "$PID" ]; then
   exit 1
 fi
 
+PACKAGE="${PACKAGE:-golang.org/x/net/http2}"
+
 arr=()
 no_threads="$(ls /proc/$PID/task | wc -w)"
 for n in $(seq 1 $no_threads); do
   arr+=("-ex" "thread $n")
-  arr+=("-ex" "print 'golang.org/x/net/http2.VerboseLogs'=1")
-  arr+=("-ex" "print 'golang.org/x/net/http2.logFrameWrites'=1")
-  arr+=("-ex" "print 'golang.org/x/net/http2.logFrameReads'=1")
-  arr+=("-ex" "print 'golang.org/x/net/http2/h2c.http2VerboseLogs'=1") # note: this might not be in use, feel free to ignore the related errors
+  arr+=("-ex" "print '$PACKAGE.VerboseLogs'=1")
+  arr+=("-ex" "print '$PACKAGE.logFrameWrites'=1")
+  arr+=("-ex" "print '$PACKAGE.logFrameReads'=1")
+  arr+=("-ex" "print '$PACKAGE/h2c.http2VerboseLogs'=1") # note: this might not be in use, feel free to ignore the related errors
 done
 
 gdb -p $PID -ex "set confirm off" -ex "set pagination off" "${arr[@]}" -ex "quit"
