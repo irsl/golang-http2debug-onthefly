@@ -33,4 +33,4 @@ The other script, `remote-setenv.sh` can be used to set an environment variable 
 on the fly. Calling it with `GODEBUG http2debug=2` would not work, as this envvar is processed early
 in a package initializer of `net/http`.
 
-
+(Remark, runtime changes of environment variables don't reflect in `/proc/<pid>/environ˙.)
