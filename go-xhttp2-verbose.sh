@@ -21,4 +21,4 @@ for n in $(seq 1 $no_threads); do
   arr+=("-ex" "print 'golang.org/x/net/http2/h2c.http2VerboseLogs'=1") # note: this might not be in use, feel free to ignore the related errors
 done
 
-gdb -p $PID ex "set confirm off" -ex "set pagination off" "${arr[@]}" -ex "quit" < /dev/null
+gdb -p $PID -ex "set confirm off" -ex "set pagination off" "${arr[@]}" -ex "quit"
