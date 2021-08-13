@@ -17,5 +17,5 @@ for n in $(seq 1 $no_threads); do
   arr+=("-ex" "print 'net/http.http2logFrameWrites'=1")
 done
 
-gdb -p $PID ex "set confirm off" -ex "set pagination off" "${arr[@]}" -ex "quit" </dev/null
+gdb -p $PID -ex "set confirm off" -ex "set pagination off" "${arr[@]}" -ex "quit" </dev/null
 
