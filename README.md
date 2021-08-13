@@ -29,6 +29,10 @@ On the stderr of the server application, lines like this will show up:
 2021/08/13 09:16:36 http2: decoded hpack field header field "accept" = "*/*"
 ```
 
+If your target is a go-grpc server, use the `go-xhttp2-verbose.sh` script instead
+(as the underlying h2 implementation of go-grpc is coming from golang.org/x/net/http2
+and does not use the language built-in.)
+
 The other script, `remote-setenv.sh` can be used to set an environment variable in a remote process
 on the fly. Calling it with `GODEBUG http2debug=2` would not work, as this envvar is processed early
 in a package initializer of `net/http`.
